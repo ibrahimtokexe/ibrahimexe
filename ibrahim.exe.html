@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ibrahim.exe</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;--card:#111;--ink:#fff;--edge:#fff;--o:#fff;--b:#3a3a3a;--p:#bdbdbd;--shadow:#6b6b6b;--on-o:#000;
+  color-scheme:dark;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000}}
+:root[data-theme="dark"]{--bg:#000;color-scheme:dark}
+:root[data-theme="light"]{--bg:#fff;--card:#fff;--ink:#000;--edge:#000;--o:#000;--b:#d6d6d6;--p:#8f8f8f;--shadow:#000;--on-o:#fff;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.08rem/1.6 "DM Sans",system-ui,sans-serif;overflow-x:hidden;transition:background .3s,color .3s}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.07;background-image:radial-gradient(var(--ink) 1px,transparent 1.4px);background-size:22px 22px}
+h1,h2,h3{font-family:"Unbounded",system-ui,sans-serif;margin:0;line-height:1.05}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--p);outline-offset:3px}
+header{display:flex;justify-content:space-between;align-items:center;padding:1rem 5vw;position:relative;z-index:3}
+.logo{font-family:"Unbounded",sans-serif;font-weight:900;background:var(--o);color:var(--on-o);padding:.4rem .9rem;border:3px solid var(--edge);border-radius:10px;transform:rotate(-3deg);box-shadow:4px 4px 0 var(--shadow);transition:transform .25s}
+.logo:hover{transform:rotate(3deg) scale(1.06)}
+.hdr-r{display:flex;gap:.8rem;align-items:center}
+.pill{border:3px solid var(--edge);border-radius:999px;padding:.35rem 1rem;font-weight:700;background:var(--card);box-shadow:3px 3px 0 var(--shadow);transition:transform .15s,box-shadow .15s,background .15s}
+.pill:hover{transform:translate(3px,3px);box-shadow:0 0 0 var(--shadow);background:var(--b);color:var(--ink)}
+#theme{font-size:1.1rem;cursor:pointer;color:inherit;font-family:inherit}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:5vh 5vw 9vh;position:relative;z-index:2}
+.hero h1{font-size:clamp(2.4rem,7.4vw,5.6rem);font-weight:900;letter-spacing:-.03em}
+.hero h1 .hl{display:inline-block;background:var(--b);color:var(--ink);padding:0 .2em;border:3px solid var(--edge);border-radius:14px;transform:rotate(-2deg);box-shadow:6px 6px 0 var(--shadow);transition:transform .3s cubic-bezier(.3,1.7,.5,1)}
+.hero h1 .hl:hover{transform:rotate(2deg) scale(1.05)}
+.hero p{max-width:44ch;margin:1.6rem 0 2rem;opacity:.85}
+.btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.9rem 1.6rem;font-weight:700;border:3px solid var(--edge);border-radius:14px;background:var(--o);color:var(--on-o);box-shadow:5px 5px 0 var(--shadow);transition:transform .15s,box-shadow .15s}
+.btn.alt{background:var(--p)}
+.btn:hover{transform:translate(5px,5px);box-shadow:0 0 0 var(--shadow)}
+.stack{position:relative;width:min(380px,80vw);aspect-ratio:1/1.15;justify-self:center}
+.polaroid{position:absolute;left:50%;top:50%;width:68%;background:#fff;padding:.7rem .7rem 2.4rem;border:3px solid #000;border-radius:6px;box-shadow:6px 6px 0 var(--shadow);color:#000;transition:transform .55s cubic-bezier(.3,1.5,.5,1),z-index 0s .15s;cursor:pointer}
+.polaroid .ph{aspect-ratio:1;border:2px solid #000;background-size:cover;background-position:center}
+.polaroid-image{display:block;width:100%;aspect-ratio:1;border:2px solid #000;object-fit:cover}
+.polaroid span{position:absolute;bottom:.6rem;left:0;right:0;text-align:center;font-family:"Unbounded",sans-serif;font-size:.75rem;font-weight:600}
+.ph{background-color:var(--b);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.18) 0 10px,transparent 10px 20px);display:grid;place-items:center;color:var(--ink);font-weight:700}
+.ph:empty::after{content:"Fotoğrafın buraya"}
+.polaroid:nth-child(1){z-index:3;transform:translate(-50%,-50%) rotate(-9deg) translate(-12%,4%)}
+.polaroid:nth-child(2){transform:translate(-50%,-50%) rotate(7deg) translate(14%,-3%)}
+.polaroid:nth-child(3){transform:translate(-50%,-50%) rotate(-2deg)}
+.polaroid .ph{color:#000}.polaroid:nth-child(1) .ph{background-color:#777}
+.polaroid:nth-child(2) .ph{background-color:#bbb}.polaroid:nth-child(3) .ph{background-color:#999}
+.stack:hover .polaroid:nth-child(1){transform:translate(-50%,-50%) rotate(-14deg) translate(-62%,6%)}
+.stack:hover .polaroid:nth-child(2){transform:translate(-50%,-50%) rotate(12deg) translate(62%,-6%)}
+.stack:hover .polaroid:nth-child(3){transform:translate(-50%,-56%) rotate(0deg)}
+.polaroid:hover{z-index:5;transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+.stack .polaroid:hover{transform:translate(-50%,-62%) rotate(0deg) scale(1.1)!important}
+.band{background:var(--o);color:var(--on-o);border-block:3px solid var(--edge);transform:rotate(-1.6deg);margin:2vh -3vw;overflow:hidden;position:relative;z-index:2}
+.track{display:flex;width:max-content;animation:run 22s linear infinite}
+.band:hover .track{animation-play-state:paused}
+.track span{font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(1.3rem,3.4vw,2.2rem);padding:.8rem 1.6rem;transition:transform .2s,color .2s;display:inline-block}
+.track span:hover{transform:scale(1.25) rotate(-4deg);color:var(--b)}
+@keyframes run{to{transform:translateX(-50%)}}
+section{padding:10vh 5vw 4vh;position:relative;z-index:2}
+section h2{font-size:clamp(1.8rem,5vw,3rem);margin-bottom:2.2rem;font-weight:900}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.card{--c:var(--b);background:var(--card);border:3px solid var(--edge);border-radius:20px;padding:1.6rem;box-shadow:8px 8px 0 var(--shadow);transform-style:preserve-3d;transition:box-shadow .2s,background .25s;position:relative;will-change:transform}
+.card:nth-child(2){--c:var(--p)}.card:nth-child(3){--c:var(--o)}
+.card .tag{display:inline-block;background:var(--ink);color:var(--bg);border:2px solid var(--edge);border-radius:8px;padding:.1rem .6rem;font-weight:700;font-size:.85rem}
+.card h3{font-size:1.35rem;margin:.9rem 0 .5rem}
+.card p{margin:0;opacity:.8}
+.card:hover{box-shadow:14px 14px 0 var(--c)}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:center}
+.me{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;border:3px solid var(--edge);border-radius:24px;box-shadow:10px 10px 0 var(--p);overflow:hidden;filter:grayscale(1) contrast(1.1);transition:filter .5s,transform .5s,box-shadow .3s}
+.me:hover{filter:none;transform:rotate(-2deg) scale(1.03);box-shadow:16px 16px 0 var(--o)}
+.about p{font-size:1.2rem;max-width:48ch}
+.big{display:block;font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(2rem,8vw,6rem);margin-top:1rem;width:fit-content;position:relative}
+.big::after{content:"";position:absolute;left:0;bottom:-.1em;height:.14em;width:100%;background:var(--o);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.big:hover::after{transform:scaleX(1)}
+.mag{display:inline-block;transition:transform .2s}
+footer{padding:4rem 5vw 2rem;opacity:.7;position:relative;z-index:2}
+#cur{position:fixed;left:0;top:0;width:26px;height:26px;border:2px solid #fff;border-radius:50%;pointer-events:none;mix-blend-mode:difference;z-index:50;transition:width .2s,height .2s,background .2s;transform:translate(-100px,-100px)}
+#cur.big{width:64px;height:64px;background:#fff}
+@media (pointer:coarse){#cur{display:none}}
+@media (max-width:760px){.hero,.about{grid-template-columns:1fr}.stack{margin-top:2rem}.stack:hover .polaroid:nth-child(1){transform:translate(-50%,-50%) rotate(-12deg) translate(-40%,6%)}.stack:hover .polaroid:nth-child(2){transform:translate(-50%,-50%) rotate(10deg) translate(40%,-6%)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<header>
+  <a class="logo" href="#">ibrahim.exe</a>
+  <div class="hdr-r">
+    <a class="pill" href="#projeler">Projeler</a>
+    <a class="pill" href="#ben">Ben</a>
+    <button class="pill" id="theme" aria-label="Temayı değiştir">☾</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div>
+      <h1>Selam, ben <span class="hl">ibrahim.exe</span> ve kod yazıyorum.</h1>
+      <p>Fikirlerimi çalışan uygulamalara, oyunlara ve sitelere çeviriyorum. Fotoğrafların üstüne gel, dağılsınlar.</p>
+      <div class="btns">
+        <a class="btn" href="#projeler">Projelerimi gör</a>
+        <a class="btn alt" href="#iletisim">Bana yaz</a>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="polaroid"><img class="polaroid-image" src="images/IMG_20261003_225352.jpg" alt="İbrahim'in fotoğrafı"><span>ben</span></div>
+      <div class="polaroid"><img class="polaroid-image" src="images/IMG-20260731-WA0001%20(1).jpg" alt="İkinci Polaroid fotoğrafı"><span>masam</span></div>
+      <div class="polaroid"><img class="polaroid-image" src="images/IMG_20261006_205710.jpg" alt="Üçüncü Polaroid fotoğrafı"><span>kod vakti</span></div>
+    </div>
+  </div>
+
+  <div class="band" aria-hidden="true">
+    <div class="track">
+      <span>HTML ✦ CSS ✦ JavaScript ✦ Python ✦ Git ✦ Oyun ✦ </span>
+      <span>HTML ✦ CSS ✦ JavaScript ✦ Python ✦ Git ✦ Oyun ✦ </span>
+    </div>
+  </div>
+
+  <section id="projeler">
+    <h2>Yaptıklarım</h2>
+    <div class="grid">
+      <a class="card" href="#"><span class="tag">uygulama</span><h3>Hava Durumu</h3><p>Şehrini yaz, anında sıcaklığı ve tahmini gör.</p></a>
+      <a class="card" href="#"><span class="tag">oyun</span><h3>Mini Oyun</h3><p>Tarayıcıda oynanan, skor tutan küçük bir oyun.</p></a>
+      <a class="card" href="#"><span class="tag">araç</span><h3>Not Defteri</h3><p>Notlarını kaydeden sade ve hızlı bir uygulama.</p></a>
+    </div>
+  </section>
+
+  <section id="ben">
+    <div class="about">
+      <img class="me" src="images/İbrahim-Tok-Profil-01-1x1-03-(1080x1080).jpg" alt="İbrahim Tok'un profil fotoğrafı">
+      <div>
+        <h2>Ben kimim?</h2>
+        <p>Yazılıma meraklı biriyim. Bir şeyi çalıştırdığımda alabileceğim en güzel his bu. Buraya kendin hakkında iki cümle yazabilirsin.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim">
+    <h2>Konuşalım</h2>
+    <a class="big mag" href="#">ibrahimtok.exe@gmail.com</a>
+  </section>
+</main>
+<footer>© 2026 ibrahim.exe</footer>
+
+<script>
+(function(){
+  var root=document.documentElement,tb=document.getElementById('theme');
+  function set(t){root.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☾':'☀';tb.setAttribute('aria-label',t==='dark'?'Açık temaya geç':'Koyu temaya geç');tb.setAttribute('aria-pressed',t==='light'?'true':'false');try{localStorage.setItem('theme',t)}catch(e){}}
+  var s=null;try{s=localStorage.getItem('theme')}catch(e){}
+  set(s==='light'?'light':'dark');
+  tb.addEventListener('click',function(){set(root.getAttribute('data-theme')==='dark'?'light':'dark')});
+
+  var cur=document.getElementById('cur');
+  window.addEventListener('pointermove',function(e){cur.style.transform='translate('+(e.clientX-13)+'px,'+(e.clientY-13)+'px)'});
+  document.querySelectorAll('a,button,.polaroid,.card,.me').forEach(function(el){
+    el.addEventListener('pointerenter',function(){cur.classList.add('big')});
+    el.addEventListener('pointerleave',function(){cur.classList.remove('big')});
+  });
+
+  document.querySelectorAll('.card').forEach(function(c){
+    c.addEventListener('pointermove',function(e){
+      var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      c.style.transform='perspective(700px) rotateY('+(x*14)+'deg) rotateX('+(-y*14)+'deg) translateY(-6px)';
+    });
+    c.addEventListener('pointerleave',function(){c.style.transform=''});
+  });
+
+  document.querySelectorAll('.mag,.btn').forEach(function(m){
+    m.addEventListener('pointermove',function(e){
+      var r=m.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
+      m.style.translate=(x*.25)+'px '+(y*.25)+'px';
+    });
+    m.addEventListener('pointerleave',function(){m.style.translate=''});
+  });
+})();
+</script>
+</body>
+</html>
